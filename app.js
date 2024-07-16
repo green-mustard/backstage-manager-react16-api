@@ -18,12 +18,7 @@ const session = require('koa-generic-session')
  */
 const redisStore = require('koa-redis')
 
-const {
-  sessionInfo,
-  cookieInfo,
-  redisInfo,
-  corsOrigin,
-} = require('./config/account_config')
+const { sessionInfo, cookieInfo, redisInfo, corsOrigin } = require('./config/account_config')
 
 const crawlerRouter = require('./routes/crawler')
 const indexRouter = require('./routes/index')
@@ -38,13 +33,15 @@ app.use(
     origin: function (ctx) {
       return corsOrigin
     },
-  }),
+    // 允许跨域请求包含凭证（如cookies、HTTP认证及客户端SSL证明等）
+    credentials: true
+  })
 )
 
 app.use(
   bodyparser({
-    enableTypes: ['json', 'form', 'text'],
-  }),
+    enableTypes: ['json', 'form', 'text']
+  })
 )
 app.use(json())
 app.use(logger())
@@ -52,8 +49,8 @@ app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(
   views(__dirname + '/views', {
-    extension: 'ejs',
-  }),
+    extension: 'ejs'
+  })
 )
 
 // 加密cookie的key
@@ -65,8 +62,8 @@ app.use(
     key: sessionInfo.name, // 设置cookie的name
     prefix: sessionInfo.prefix, // 设置Redis key的前缀
     cookie: cookieInfo, // 设置cookie的配置
-    store: redisStore(redisInfo), // 使用Redis存储会话数据
-  }),
+    store: redisStore(redisInfo) // 使用Redis存储会话数据
+  })
 )
 
 // logger

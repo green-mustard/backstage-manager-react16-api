@@ -39,6 +39,16 @@ class Admin {
     }
   }
 
+  async loginCheck(ctx, next) {
+    if (ctx.session && ctx.session.userInfo) {
+      // 登录状态
+      ctx.body = returnInfo(LOGIN.LOGIN_STATUS)
+      return
+    }
+    // 非登录状态
+    ctx.body = returnInfo(LOGIN.NOT_LOGIN_STATUS)
+  }
+
   /**
    * 异步处理登录动作。
    *
@@ -79,7 +89,7 @@ class Admin {
     // 准备登录信息，包括去除空格的用户名和加密后的密码
     const userInfo = {
       username: trimSpace(username),
-      password: makeCrypto(trimSpace(password)),
+      password: makeCrypto(trimSpace(password))
     }
 
     // 尝试登录，等待登录结果
@@ -94,8 +104,12 @@ class Admin {
       return
     }
 
+    if (!ctx.session.userInfo) {
+      ctx.session.userInfo = result
+    }
+
     // 登录成功，返回成功信息和登录结果
-    return (ctx.body = returnInfo(LOGIN.SUCESS, result))
+    return (ctx.body = returnInfo(LOGIN.SUCESS, ctx.session.userInfo))
   }
 }
 

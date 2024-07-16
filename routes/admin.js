@@ -9,5 +9,6 @@ router.prefix('/admin')
 router.get('/add_admin_account', adminController.addAdminAccount)
 // 配置POST请求路由，用于处理管理员登录动作
 router.post('/login_action', adminController.loginAction)
+router.get('/login_check', adminController.loginCheck)
 
 module.exports = router

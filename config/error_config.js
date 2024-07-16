@@ -20,6 +20,14 @@ module.exports = {
       error_code: 10005,
       error_message: 'Username or password is required',
     },
+    NOT_LOGIN_STATUS: {
+      error_code: 10006,
+      error_message: 'Is not logged',
+    },
+    LOGIN_STATUS: {
+      error_code: 10007,
+      error_message: 'Already logged in',
+    },
     SUCESS: {
       error_code: 0,
       error_message: 'Login success',
