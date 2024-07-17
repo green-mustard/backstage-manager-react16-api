@@ -9,6 +9,9 @@ router.prefix('/admin')
 router.get('/add_admin_account', adminController.addAdminAccount)
 // 配置POST请求路由，用于处理管理员登录动作
 router.post('/login_action', adminController.loginAction)
+// 配置GET请求路由，用于检查管理员登录状态
 router.get('/login_check', adminController.loginCheck)
+// 配置GET请求路由，用于管理员退出登录
+router.get('/logout', adminController.logout)
 
 module.exports = router

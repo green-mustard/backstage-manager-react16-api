@@ -109,7 +109,25 @@ class Admin {
     }
 
     // 登录成功，返回成功信息和登录结果
-    return (ctx.body = returnInfo(LOGIN.SUCESS, ctx.session.userInfo))
+    ctx.body = returnInfo(LOGIN.SUCESS, ctx.session.userInfo)
+  }
+
+  /**
+   * 异步函数：处理用户登出逻辑
+   *
+   * @param {Object} ctx - Context对象，代表当前的上下文环境，用于访问请求、响应、会话等信息。
+   * @param {Function} next - 中间件函数，必须调用以继续中间件链。没有参数，但可以抛出错误。
+   *
+   * 该函数的主要作用是删除用户的会话信息，以实现登出功能。
+   * 它首先从会话对象中删除userInfo属性，然后设置响应体为登出状态信息。
+   */
+  async logout(ctx, next) {
+    console.log(ctx)
+    // 删除会话中的用户信息，实现登出功能
+    delete ctx.session.userInfo
+
+    // 设置响应体为登出状态信息
+    ctx.body = returnInfo(LOGIN.LOGOUT_STATUS)
   }
 }
 
