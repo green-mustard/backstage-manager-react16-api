@@ -122,7 +122,6 @@ class Admin {
    * 它首先从会话对象中删除userInfo属性，然后设置响应体为登出状态信息。
    */
   async logout(ctx, next) {
-    console.log(ctx)
     // 删除会话中的用户信息，实现登出功能
     delete ctx.session.userInfo
 

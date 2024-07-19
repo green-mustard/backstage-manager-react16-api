@@ -19,7 +19,9 @@ class CourseDataService {
     }
   }
   async getCourseData() {
-    return await courseDataModel.findAll()
+    return await courseDataModel.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'imgUrl'] },
+    })
   }
 }
 

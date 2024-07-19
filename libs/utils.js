@@ -15,7 +15,7 @@ const crypto = require('crypto')
 const { resolve } = require('path')
 const {
   qiniu: { keys },
-  cryptoSecret,
+  cryptoSecret
 } = require('../config/account_config')
 
 function startProcess(options) {
@@ -123,5 +123,5 @@ module.exports = {
   qiniuUpload,
   makeCrypto,
   trimSpace,
-  returnInfo,
+  returnInfo
 }

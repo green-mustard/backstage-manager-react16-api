@@ -10,12 +10,14 @@ crawler({
     const data = []
     coursetabs.forEach((item, index) => {
       const tabName = item.innerText
-      // 因为tab中的‘全部’的id应该为0，所以编号从0开始
       const tid = index
-      data.push({
-        tid,
-        tabName,
-      })
+      // 检查tabName是否为"全部"，如果不是，则添加到data数组
+      if (tabName !== '全部') {
+        data.push({
+          tid,
+          tabName,
+        })
+      }
     })
     return data
   },

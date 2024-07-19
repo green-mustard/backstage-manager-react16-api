@@ -23,8 +23,6 @@ crawler({
           '.kc-course-card-price-current---iUq7LY span',
         ).innerText,
         studentCount: footer.querySelector('span:nth-child(2)').innerText,
-        // 课程分类，用于后期筛选
-        filed: -1,
         courseCount: item.querySelector('.kc-course-card-tag-chapter---BvIeIq')
           .innerText,
       }
