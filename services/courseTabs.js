@@ -18,6 +18,13 @@ class CourseTabsService {
       return await courseTabsModel.create(data)
     }
   }
+
+  async getCourseTab() {
+    return await courseTabsModel.findAll({
+      // 获取课程标签所有数据的同时，排除掉'tid', 'createdAt', 'updatedAt'这几个属性
+      attributes: { exclude: ['tid', 'createdAt', 'updatedAt'] },
+    })
+  }
 }
 
 module.exports = new CourseTabsService()

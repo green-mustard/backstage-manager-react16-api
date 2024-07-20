@@ -1,5 +1,6 @@
 // 导入课程数据获取服务
 const { getCourseData } = require('../services/courseData.js')
+const { getCourseTab } = require('../services/courseTabs.js')
 // 导入返回信息处理工具
 const { returnInfo } = require('../libs/utils.js')
 // 导入错误配置信息
@@ -17,14 +18,16 @@ class Index {
    */
   async getCourses(ctx, next) {
     // 异步获取课程数据
-    const data = await getCourseData()
+    const courseData = await getCourseData()
+    const tabData = await getCourseTab()
 
     // 根据获取数据的结果，设置响应体
     // 如果数据获取成功，返回成功信息和数据
     // 如果数据获取失败，返回失败信息
-    ctx.body = data
-      ? returnInfo(API.RETURN_SUCCESS, data)
-      : returnInfo(API.RETURN_FAIL)
+    ctx.body =
+      courseData && tabData
+        ? returnInfo(API.RETURN_SUCCESS, { courseData, tabData })
+        : returnInfo(API.RETURN_FAIL)
 
     // 注释掉的代码是与上面相同逻辑的另一种写法
     // if (data) {

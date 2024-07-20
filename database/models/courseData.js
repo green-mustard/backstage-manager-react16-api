@@ -43,7 +43,7 @@ const CourseData = sequelize.define('course_data', {
     type: STRING,
     allowNull: false,
   },
-  filed: {
+  field: {
     comment: '课程分类',
     type: INT,
     defaultValue: 0,
