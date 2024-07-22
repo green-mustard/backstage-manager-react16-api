@@ -46,5 +46,13 @@ module.exports = {
       error_code: 20001,
       error_message: 'Data is returned failed',
     },
+    CHANGE_COURSE_TAB_SUCCESS: {
+      error_code: 0,
+      error_message: 'course_tab is changed successfully',
+    },
+    CHANGE_COURSE_TAB_FAIL: {
+      error_code: 20002,
+      error_message: "it's fail to change course_tab",
+    },
   },
 }

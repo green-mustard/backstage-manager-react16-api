@@ -6,5 +6,6 @@ const indexController = require('../controllers/Index')
 const loginCheck = require('../middleware/loginCheck')
 
 router.get('/get_courses', loginCheck, indexController.getCourses)
+router.post('/change_course_tab', loginCheck, indexController.changeCourseTab)
 
 module.exports = router
