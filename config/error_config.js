@@ -54,5 +54,13 @@ module.exports = {
       error_code: 20002,
       error_message: "it's fail to change course_tab",
     },
+    CHANGE_COURSE_STATUS_SUCCESS: {
+      error_code: 0,
+      error_message: 'course_status is changed successfully',
+    },
+    CHANGE_COURSE_STATUS_FAIL: {
+      error_code: 20003,
+      error_message: "it's fail to change course_status",
+    },
   },
 }

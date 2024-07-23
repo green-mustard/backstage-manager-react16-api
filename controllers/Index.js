@@ -1,5 +1,9 @@
 // 导入课程数据获取服务
-const { getCourseData, changeCourseTab } = require('../services/courseData.js')
+const {
+  getCourseData,
+  changeCourseTab,
+  changeStatus,
+} = require('../services/courseData.js')
 const { getCourseTab } = require('../services/courseTabs.js')
 // 导入返回信息处理工具
 const { returnInfo } = require('../libs/utils.js')
@@ -47,6 +51,16 @@ class Index {
       return
     }
     ctx.body = returnInfo(API.CHANGE_COURSE_TAB_SUCCESS)
+  }
+
+  async changeCourseStatus(ctx, next) {
+    const { cid, status } = ctx.request.body
+    const result = await changeStatus(cid, status)
+    if (!result) {
+      ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_FAIL)
+      return
+    }
+    ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_SUCCESS)
   }
 }
 

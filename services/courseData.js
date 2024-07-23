@@ -47,6 +47,18 @@ class CourseDataService {
     // 返回更新操作影响的行数
     return result[0]
   }
+
+  async changeStatus(cid, status) {
+    const result = await courseDataModel.update(
+      { status },
+      {
+        where: {
+          cid,
+        },
+      },
+    )
+    return result[0]
+  }
 }
 
 module.exports = new CourseDataService()

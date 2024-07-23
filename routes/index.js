@@ -7,5 +7,10 @@ const loginCheck = require('../middleware/loginCheck')
 
 router.get('/get_courses', loginCheck, indexController.getCourses)
 router.post('/change_course_tab', loginCheck, indexController.changeCourseTab)
+router.post(
+  '/change_course_status',
+  loginCheck,
+  indexController.changeCourseStatus,
+)
 
 module.exports = router
