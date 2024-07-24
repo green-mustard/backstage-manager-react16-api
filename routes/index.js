@@ -6,11 +6,21 @@ const indexController = require('../controllers/Index')
 const loginCheck = require('../middleware/loginCheck')
 
 router.get('/get_courses', loginCheck, indexController.getCourses)
+router.get(
+  '/get_popular_course_data',
+  loginCheck,
+  indexController.getPopularCourse,
+)
 router.post('/change_course_tab', loginCheck, indexController.changeCourseTab)
 router.post(
   '/change_course_status',
   loginCheck,
   indexController.changeCourseStatus,
+)
+router.post(
+  '/change_popular_course_status',
+  loginCheck,
+  indexController.changePopularCourseStatus,
 )
 
 module.exports = router

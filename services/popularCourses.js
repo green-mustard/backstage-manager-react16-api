@@ -1,8 +1,8 @@
 /**
  * 引入热门课程模型
- * @module coursesModel
+ * @module popularCourseModel
  */
-const coursesModel = require('../database/models/popularCourses')
+const popularCourseModel = require('../database/models/popularCourses')
 
 /**
  * 热门课程服务类
@@ -20,23 +20,36 @@ class PopularCoursesService {
       // 获取数据中的图片源URL
       const imgSrc = data.imgSrc
       // 检查是否已存在相同图片源的课程
-      const result = await coursesModel.findOne({
+      const result = await popularCourseModel.findOne({
         where: { imgSrc },
       })
 
       // 如果课程已存在，更新课程数据
       if (result) {
-        return await coursesModel.update(data, {
+        return await popularCourseModel.update(data, {
           where: { imgSrc },
         })
       } else {
         // 如果课程不存在，创建新课程
-        return await coursesModel.create(data)
+        return await popularCourseModel.create(data)
       }
     } catch (error) {
       // 捕获并打印任何错误
       console.log(error)
     }
+  }
+  async getPopularCourses() {
+    return await popularCourseModel.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'imgSrc'] },
+    })
+  }
+
+  async changePopularStatus(cid, status) {
+    const result = await popularCourseModel.update(
+      { status },
+      { where: { cid } },
+    )
+    return result[0]
   }
 }
 

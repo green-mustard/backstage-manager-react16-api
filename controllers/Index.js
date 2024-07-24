@@ -5,10 +5,15 @@ const {
   changeStatus,
 } = require('../services/courseData.js')
 const { getCourseTab } = require('../services/courseTabs.js')
+const {
+  getPopularCourses,
+  changePopularStatus,
+} = require('../services/popularCourses.js')
 // 导入返回信息处理工具
 const { returnInfo } = require('../libs/utils.js')
 // 导入错误配置信息
 const { API } = require('../config/error_config.js')
+const popularCourses = require('../services/popularCourses.js')
 
 /**
  * Index类，用于处理课程相关信息
@@ -41,6 +46,14 @@ class Index {
     // }
   }
 
+  async getPopularCourse(ctx, next) {
+    const popularCourseData = await getPopularCourses()
+
+    ctx.body = popularCourseData
+      ? returnInfo(API.RETURN_SUCCESS, popularCourseData)
+      : returnInfo(API.RETURN_FAIL)
+  }
+
   async changeCourseTab(ctx, next) {
     const { cid, field } = ctx.request.body
 
@@ -56,6 +69,16 @@ class Index {
   async changeCourseStatus(ctx, next) {
     const { cid, status } = ctx.request.body
     const result = await changeStatus(cid, status)
+    if (!result) {
+      ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_FAIL)
+      return
+    }
+    ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_SUCCESS)
+  }
+
+  async changePopularCourseStatus(ctx, next) {
+    const { cid, status } = ctx.request.body
+    const result = await changePopularStatus(cid, status)
     if (!result) {
       ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_FAIL)
       return
