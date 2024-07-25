@@ -12,15 +12,6 @@ router.get(
   indexController.getPopularCourse,
 )
 router.post('/change_course_tab', loginCheck, indexController.changeCourseTab)
-router.post(
-  '/change_course_status',
-  loginCheck,
-  indexController.changeCourseStatus,
-)
-router.post(
-  '/change_popular_course_status',
-  loginCheck,
-  indexController.changePopularCourseStatus,
-)
+router.post('/change_status', loginCheck, indexController.changeStatus)
 
 module.exports = router

@@ -48,12 +48,12 @@ class CourseDataService {
     return result[0]
   }
 
-  async changeStatus(cid, status) {
+  async changeCourseStatus(id, status) {
     const result = await courseDataModel.update(
       { status },
       {
         where: {
-          cid,
+          cid: id,
         },
       },
     )

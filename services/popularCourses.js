@@ -44,10 +44,10 @@ class PopularCoursesService {
     })
   }
 
-  async changePopularStatus(cid, status) {
+  async changePopularCourseStatus(id, status) {
     const result = await popularCourseModel.update(
       { status },
-      { where: { cid } },
+      { where: { cid: id } },
     )
     return result[0]
   }

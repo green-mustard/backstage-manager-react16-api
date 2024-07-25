@@ -2,12 +2,12 @@
 const {
   getCourseData,
   changeCourseTab,
-  changeStatus,
+  changeCourseStatus,
 } = require('../services/courseData.js')
 const { getCourseTab } = require('../services/courseTabs.js')
 const {
   getPopularCourses,
-  changePopularStatus,
+  changePopularCourseStatus,
 } = require('../services/popularCourses.js')
 // 导入返回信息处理工具
 const { returnInfo } = require('../libs/utils.js')
@@ -66,24 +66,26 @@ class Index {
     ctx.body = returnInfo(API.CHANGE_COURSE_TAB_SUCCESS)
   }
 
-  async changeCourseStatus(ctx, next) {
-    const { cid, status } = ctx.request.body
-    const result = await changeStatus(cid, status)
-    if (!result) {
-      ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_FAIL)
-      return
-    }
-    ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_SUCCESS)
-  }
+  async changeStatus(ctx, next) {
+    const { id, status, field } = ctx.request.body
+    let result = null
 
-  async changePopularCourseStatus(ctx, next) {
-    const { cid, status } = ctx.request.body
-    const result = await changePopularStatus(cid, status)
-    if (!result) {
-      ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_FAIL)
-      return
+    switch (field) {
+      case 'COURSE':
+        result = await changeCourseStatus(id, status)
+        break
+      case 'POPULAR_COURSE':
+        result = await changePopularCourseStatus(id, status)
+        break
+      default:
+        ctx.body = returnInfo(API.FIELD_ERROR)
+        return
     }
-    ctx.body = returnInfo(API.CHANGE_COURSE_STATUS_SUCCESS)
+
+    if (!result) {
+      ctx.body = returnInfo(API.CHANGE_STATUS_FAIL)
+    }
+    ctx.body = returnInfo(API.CHANGE_STATUS_SUCCESS)
   }
 }
 
