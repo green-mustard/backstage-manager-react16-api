@@ -34,7 +34,7 @@ class CourseDataService {
    * @param {string} field - 要更新的字段名。此字段名指定要修改的课程数据的属性。
    * @returns {number} 返回更新操作影响的行数。这可以帮助确定更新是否成功。
    */
-  async changeCourseTab(cid, field) {
+  async changeCourseTabData(cid, field) {
     // 等待更新操作完成，并获取更新结果
     const result = await courseDataModel.update(
       { field },

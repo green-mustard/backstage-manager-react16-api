@@ -1,19 +1,19 @@
 // 导入课程数据获取服务
 const {
   getCourseData,
-  changeCourseTab,
+  changeCourseTabData,
   changeCourseStatus,
 } = require('../services/courseData.js')
 const { getCourseTab } = require('../services/courseTabs.js')
 const {
-  getPopularCourses,
+  getPopularCourseData,
   changePopularCourseStatus,
 } = require('../services/popularCourses.js')
+const { getSliderData, changeSliderStatus } = require('../services/slider.js')
 // 导入返回信息处理工具
 const { returnInfo } = require('../libs/utils.js')
 // 导入错误配置信息
 const { API } = require('../config/error_config.js')
-const popularCourses = require('../services/popularCourses.js')
 
 /**
  * Index类，用于处理课程相关信息
@@ -47,17 +47,24 @@ class Index {
   }
 
   async getPopularCourse(ctx, next) {
-    const popularCourseData = await getPopularCourses()
+    const popularCourseData = await getPopularCourseData()
 
     ctx.body = popularCourseData
       ? returnInfo(API.RETURN_SUCCESS, popularCourseData)
       : returnInfo(API.RETURN_FAIL)
   }
 
+  async getSlider(ctx, next) {
+    const sliderData = await getSliderData()
+
+    ctx.body = sliderData
+      ? returnInfo(API.RETURN_SUCCESS, sliderData)
+      : returnInfo(API.RETURN_FAIL)
+  }
   async changeCourseTab(ctx, next) {
     const { cid, field } = ctx.request.body
 
-    const result = await changeCourseTab(cid, field)
+    const result = await changeCourseTabData(cid, field)
 
     if (!result) {
       ctx.body = returnInfo(API.CHANGE_COURSE_TAB_FAIL)
@@ -76,6 +83,9 @@ class Index {
         break
       case 'POPULAR_COURSE':
         result = await changePopularCourseStatus(id, status)
+        break
+      case 'SLIDER':
+        result = await changeSliderStatus(id, status)
         break
       default:
         ctx.body = returnInfo(API.FIELD_ERROR)

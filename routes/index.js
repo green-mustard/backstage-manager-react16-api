@@ -11,6 +11,7 @@ router.get(
   loginCheck,
   indexController.getPopularCourse,
 )
+router.get('/get_slider', loginCheck, indexController.getSlider)
 router.post('/change_course_tab', loginCheck, indexController.changeCourseTab)
 router.post('/change_status', loginCheck, indexController.changeStatus)
 

@@ -20,7 +20,7 @@ class Crawler {
         // 创建一个数组，用于存放每个图片处理的Promise
         const promises = data.map(async item => {
           // 检查如果图片URL存在但key不存在，则尝试上传图片
-          if (item.imgUrl && !item.key) {
+          if (item.imgUrl && !item.imgKey) {
             try {
               // 调用七牛云上传函数，上传图片
               const imgData = await qiniuUpload({
@@ -30,7 +30,7 @@ class Crawler {
               })
               // 如果上传成功，更新item的key值
               if (imgData.key) {
-                item.key = imgData.key
+                item.imgKey = imgData.key
               }
               const result = await addSliderData(item)
               if (result) {

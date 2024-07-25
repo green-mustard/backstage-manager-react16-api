@@ -38,7 +38,7 @@ class PopularCoursesService {
       console.log(error)
     }
   }
-  async getPopularCourses() {
+  async getPopularCourseData() {
     return await popularCourseModel.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt', 'imgSrc'] },
     })

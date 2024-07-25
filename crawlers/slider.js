@@ -18,13 +18,13 @@ crawler({
         const title = '图片' + (index + 1)
         const imgUrl = item.src
         const cid = index + 1
-        const key = ''
+        const imgKey = ''
 
         data.push({
           cid,
           title,
           imgUrl,
-          key,
+          imgKey,
         })
       } else {
         console.warn(`第${index + 1}个项没有找到img标签.`)

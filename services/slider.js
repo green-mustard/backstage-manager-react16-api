@@ -23,5 +23,23 @@ class SliderService {
       console.log(error)
     }
   }
+
+  async getSliderData() {
+    return await SliderModel.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'imgUrl'] },
+    })
+  }
+
+  async changeSliderStatus(id, status) {
+    const result = await SliderModel.update(
+      { status },
+      {
+        where: {
+          cid: id,
+        },
+      },
+    )
+    return result[0]
+  }
 }
 module.exports = new SliderService()

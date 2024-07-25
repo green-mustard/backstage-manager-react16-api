@@ -18,7 +18,7 @@ const Slider = sequelize.define('slider', {
     type: STRING,
     allowNull: false,
   },
-  key: {
+  imgKey: {
     comment: 'qiniu image name',
     type: STRING,
     allowNull: false,
